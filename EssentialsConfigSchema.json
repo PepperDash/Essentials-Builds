@@ -1,0 +1,282 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Essentials Configuration File Schema",
+    "description": "",
+    "type": "object",
+    "$ref":"#/definitions/EssentialsConfig",  
+    "definitions": {
+        "EssentialsConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "template": {
+                    "$ref": "#/definitions/BasicConfig"
+                },
+                "system_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ]
+                },
+                "system": {
+                    "$ref": "#/definitions/BasicConfig"
+                },
+                "template_url": {
+                    "type": "string",
+                    "format": "uri",
+                    "qt-uri-protocols": [
+                        "https"
+                    ]
+                }
+            },
+            "required": [
+                "system",
+                "template"                
+            ],
+            "title": "Essentials Configuration"
+        },      
+        "BasicConfig": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "devices": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Device"
+                    }
+                },
+                "rooms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Room"
+                    }
+                },
+                "info": {
+                    "$ref": "#/definitions/Info"
+                },
+                "sourceLists": {
+                    "$ref": "#/definitions/SourceLists"
+                }
+            },
+            "required": [
+            ],
+            "title": "Basic Config"
+        },
+        "Info": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "name":{
+                    "type":"string"
+                },
+                "date":{
+                    "type":"string",
+                    "format": "date-time"
+                },
+                "version":{
+                    "type":"string"
+                },
+                "runtimeInfo":{
+                    "$ref":"#/definitions/RuntimeInfo"
+                },
+                "comment":{
+                    "type":"string"
+                },
+                "hostname":{
+                    "type":"string"
+                },
+                "appNumber":{
+                    "type":"integer"
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "lastUid":{
+                    "type":"integer"
+                },
+                "processorType":{
+                    "type":"string"
+                },
+                "systemType":{
+                    "type":"string"
+                },
+                "requiredControlSoftwareVersion":{
+                    "type":"string"
+                }
+            },
+            "required": [
+             
+            ],
+            "title": "Info"
+        },
+        "RuntimeInfo":{
+            "type":"object",
+            "additionalProperties": false,
+            "properties": {
+                "appName":{
+                    "type":"string"
+                },
+                "assemblyVersion": {
+                    "type":"string"
+                },
+                "osVersion":{
+                    "type":"string"
+                }
+            }
+        },
+        "Device": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "properties": {
+                    "type":"object"
+                },
+                "uid": {
+                    "type": "integer"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "group",
+                "key",
+                "properties",
+                "type"
+            ],
+            "title": "Device"
+        },
+ 
+        "Room": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "properties": {
+                    "type": "object"
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "key",
+                "name",
+                "properties",
+                "type"
+            ],
+            "title": "Room"
+        },
+        "SourceLists": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "default":{
+                    "$ref":"#/definitions/SourceList"
+                }
+            },
+            "title": "SourceLists"
+        },
+        "SourceList": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+            },
+            "title": "Source List"
+        },
+        "Source": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "icon": {
+                    "type": "string"
+                },
+                "volumeControlKey": {
+                    "type": "string"
+                },
+                "sourceKey": {
+                    "type": "string"
+                },
+                "routeList": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RouteList"
+                    }
+                },
+                "includeInSourceList": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "type": "string",
+                    "enum":[
+                        "route",
+                        "off",
+                        "other"
+                    ]
+                },
+                "altIcon": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "disableCodecSharing": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "includeInSourceList",
+                "order",
+                "routeList",
+                "sourceKey",
+                "type",
+                "volumeControlKey"
+            ],
+            "title": "Source"
+        },
+        "RouteList": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "destinationKey": {
+                    "type": "string"
+                },
+                "sourceKey": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string",
+                    "enum":[
+                        "audio",
+                        "video",
+                        "audioVideo",
+                        "usbOutput",
+                        "usbInput"
+                    ]
+                }
+            },
+            "required": [
+                "destinationKey",
+                "sourceKey",
+                "type"
+            ],
+            "title": "RouteList"
+        }
+    }
+}

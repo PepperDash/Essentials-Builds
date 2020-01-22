@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "SamsungMDC Properties Config Schema v1",
+    "description": "",
+    "$ref":"EssentialsConfigSchema.json#/definitions/Device",
+    "properties":{
+        "properties":{
+            "$ref":"#/definitions/propertiesConfig"
+        }
+    },
+    "definitions": {      
+        "propertiesConfig": {
+            "type":"object",
+            "additionalProperties": true,
+            "properties": {
+                "control":{
+                    "type":"object",
+                    "$ref":"ControlPropertiesConfigSchema.json#definitions/ControlPropertiesConfig"
+                },
+                "id":{
+                    "title":"Display ID",
+                    "description": "This must match the ID set in the display's on screen menu",
+                    "type":"string",
+                    "pattern": "^(?!FF)[0-9,A-F,a-f][0-9,A-F,a-f]$"
+                }
+            },
+            "required": [
+                "control",
+                "id"
+            ]          
+        }
+    }
+}
